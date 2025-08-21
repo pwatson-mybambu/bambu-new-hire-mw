@@ -6,9 +6,11 @@ This repository contains a complete hiring package for the MyBambu Middleware Ar
 
 ### 🌐 View HTML Visualizations
 
-**Interactive Views:**
-- **[📊 Hiring Dashboard](https://htmlpreview.github.io/?https://github.com/pwatson-mybambu/bambu-new-hire-mw/blob/main/deliverables/hiring-dashboard.html)** - Complete visual overview of the hiring process  
-- **[🏗️ Architecture Diagram](https://htmlpreview.github.io/?https://github.com/pwatson-mybambu/bambu-new-hire-mw/blob/main/docs/architecture-diagram.html)** - Interactive middleware architecture visualization
+**Live Interactive Views (GitHub Pages):**
+- **[📊 Hiring Dashboard](https://pwatson-mybambu.github.io/bambu-new-hire-mw/deliverables/hiring-dashboard.html)** - Complete visual overview of the hiring process  
+- **[🏗️ Architecture Diagram](https://pwatson-mybambu.github.io/bambu-new-hire-mw/docs/architecture-diagram.html)** - Interactive middleware architecture visualization
+
+> **Note**: These links use GitHub Pages for direct HTML rendering with full MyBambu branding!
 
 ## Position Overview
 
@@ -112,7 +114,7 @@ This repository contains a complete hiring package for the MyBambu Middleware Ar
 
 ### Project Context
 - [Project Overview](CLAUDE.md)
-- [Architecture Diagrams](https://htmlpreview.github.io/?https://github.com/pwatson-mybambu/bambu-new-hire-mw/blob/main/docs/architecture-diagram.html) - Interactive visualization
+- [Architecture Diagrams](https://pwatson-mybambu.github.io/bambu-new-hire-mw/docs/architecture-diagram.html) - Interactive visualization
 - [Development Process](planning/) - Three-phase analysis and design approach
 
 ## 📊 Success Metrics
