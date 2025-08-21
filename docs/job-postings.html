@@ -50,35 +50,52 @@
         .posting-content {
             color: var(--mid-gray);
             line-height: 1.8;
-            font-size: 1.1em;
-        }
-        
-        .posting-content h1, .posting-content h2 {
-            color: var(--brand-blue-dark);
-            font-family: 'Poppins', sans-serif;
-            margin-top: 30px;
-            margin-bottom: 15px;
-        }
-        
-        .posting-content h1 {
-            font-size: 1.8em;
+            font-size: 1.05em;
         }
         
         .posting-content h2 {
-            font-size: 1.4em;
+            color: var(--brand-blue-dark);
+            font-family: 'Poppins', sans-serif;
+            margin-top: 25px;
+            margin-bottom: 15px;
+            font-size: 1.6em;
+        }
+        
+        .posting-content h3 {
+            color: var(--brand-blue-dark);
+            font-family: 'Poppins', sans-serif;
+            margin-top: 20px;
+            margin-bottom: 12px;
+            font-size: 1.3em;
+        }
+        
+        .posting-content p {
+            margin-bottom: 15px;
         }
         
         .posting-content ul {
-            margin-left: 20px;
+            margin-left: 25px;
             margin-bottom: 20px;
         }
         
         .posting-content li {
-            margin-bottom: 8px;
+            margin-bottom: 10px;
+            position: relative;
+            list-style: none;
+            padding-left: 25px;
+        }
+        
+        .posting-content li:before {
+            content: "▸";
+            color: var(--brand-green-primary);
+            font-weight: bold;
+            position: absolute;
+            left: 0;
         }
         
         .posting-content strong {
             color: var(--brand-blue-dark);
+            font-weight: 700;
         }
         
         .copy-button {
@@ -132,6 +149,14 @@
             margin-top: 10px;
         }
         
+        .highlight-box {
+            background: linear-gradient(135deg, rgba(39, 251, 107, 0.1) 0%, rgba(41, 107, 255, 0.1) 100%);
+            border-left: 4px solid var(--brand-green-primary);
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+        
         @media (max-width: 768px) {
             .posting-header {
                 flex-direction: column;
@@ -162,6 +187,7 @@
                 <li><a href="coding-challenge.html" class="nav-link">Challenge</a></li>
                 <li><a href="interview-guide.html" class="nav-link">Interview</a></li>
                 <li><a href="architecture.html" class="nav-link">Architecture</a></li>
+                <li><a href="resources.html" class="nav-link">Resources</a></li>
             </ul>
         </div>
     </nav>
@@ -191,21 +217,25 @@
                 <strong>Best for:</strong> Quick applications, viral sharing, recruiter outreach
             </div>
             
-            <div class="posting-content" id="linkedin-content"># Senior Middleware Architect - Transform Fintech for 30M Underbanked Users
-
-MyBambu is revolutionizing financial access for Latino immigrants. We're seeking a Senior Middleware Architect to lead our Django monolith transformation, directly impacting 20-30 million underbanked users managing $170B in annual remittances.
-
-You'll architect the evolution of our 52-app Django platform into scalable microservices, optimize 22 critical integrations (Galileo, Plaid, MoneyGram), and eliminate performance bottlenecks affecting millions of daily transactions. This role requires deep Django expertise, proven monolith decomposition experience, and the ability to maintain 99.9% uptime while transforming architecture.
-
-**Requirements:**
-• 8+ years backend development, 5+ Django
-• Led 2+ monolith-to-microservices migrations  
-• PostgreSQL optimization, API design expertise
-• Financial services experience preferred
-
-**Location:** West Palm Beach, FL (hybrid) or Remote
-
-Join us in building inclusive financial infrastructure that changes lives. Apply with examples of architectural transformations you've led.</div>
+            <div class="posting-content" id="linkedin-content">
+                <h2>Senior Middleware Architect - Transform Fintech for 30M Underbanked Users</h2>
+                
+                <p>MyBambu is revolutionizing financial access for Latino immigrants. We're seeking a Senior Middleware Architect to lead our Django monolith transformation, directly impacting 20-30 million underbanked users managing $170B in annual remittances.</p>
+                
+                <p>You'll architect the evolution of our 52-app Django platform into scalable microservices, optimize 22 critical integrations (Galileo, Plaid, MoneyGram), and eliminate performance bottlenecks affecting millions of daily transactions. This role requires deep Django expertise, proven monolith decomposition experience, and the ability to maintain 99.9% uptime while transforming architecture.</p>
+                
+                <h3>Requirements:</h3>
+                <ul>
+                    <li>8+ years backend development, 5+ Django</li>
+                    <li>Led 2+ monolith-to-microservices migrations</li>
+                    <li>PostgreSQL optimization, API design expertise</li>
+                    <li>Financial services experience preferred</li>
+                </ul>
+                
+                <p><strong>Location:</strong> West Palm Beach, FL (hybrid) or Remote</p>
+                
+                <p>Join us in building inclusive financial infrastructure that changes lives. Apply with examples of architectural transformations you've led.</p>
+            </div>
         </div>
         
         <!-- Website Posting -->
@@ -213,7 +243,7 @@ Join us in building inclusive financial infrastructure that changes lives. Apply
             <div class="posting-header">
                 <h2 class="posting-title">Company Website Posting</h2>
                 <div style="display: flex; gap: 15px; align-items: center;">
-                    <span class="platform-badge website-badge">Full Website</span>
+                    <span class="platform-badge website-badge">Full Version</span>
                     <button class="copy-button" onclick="copyToClipboard('website-content', this)">
                         📋 Copy Text
                     </button>
@@ -221,136 +251,126 @@ Join us in building inclusive financial infrastructure that changes lives. Apply
             </div>
             
             <div class="posting-meta">
-                <strong>Platform:</strong> Company website and job boards - Comprehensive technical details<br>
-                <strong>Length:</strong> <span id="website-count">0</span> characters (Ideal for detailed job boards)<br>
-                <strong>Best for:</strong> Serious candidates, technical recruiters, comprehensive applications
+                <strong>Platform:</strong> Company website - Comprehensive posting with full details<br>
+                <strong>Length:</strong> <span id="website-count">0</span> characters (Website optimal: 3000-5000)<br>
+                <strong>Best for:</strong> Detailed job boards, company careers page, serious candidates
             </div>
             
-            <div class="posting-content" id="website-content"># Senior Middleware Architect - Lead the Transformation of Fintech Infrastructure
-
-## About MyBambu
-MyBambu is on a mission to provide comprehensive financial services to 20-30 million underbanked Latino immigrants in the United States. We facilitate over $170 billion in annual remittances to Latin America while offering banking, money transfers, and financial empowerment tools to communities traditionally excluded from mainstream banking. Our platform serves users regardless of immigration status, making financial inclusion a reality for millions.
-
-## The Opportunity
-We're seeking an exceptional Senior Middleware Architect to lead the architectural transformation of our Django-based platform. This is a rare opportunity to have massive technical and social impact, architecting systems that process millions of financial transactions while serving communities that depend on our reliability.
-
-## Your Mission
-As our Middleware Architect, you'll inherit a robust but monolithic Django application with 52 interconnected apps, 884 API endpoints, and 22 third-party integrations. Your primary mission is to lead its evolution into a scalable, resilient microservices architecture while maintaining our 99.9% uptime commitment.
-
-## Key Responsibilities
-• **Architectural Leadership**: Design and execute the decomposition of our Django monolith into domain-driven microservices, starting with Identity, Payments, and International Transfers services
-• **Performance Optimization**: Address 346 identified N+1 queries, implement strategic caching, and optimize our PostgreSQL database handling 400+ migrations
-• **Integration Excellence**: Modernize our integration layer managing critical connections to Galileo (banking), MoneyGram (remittances), Plaid (bank connections), and 19 other services
-• **Technical Mentorship**: Guide a team of 10+ engineers through architectural changes, establishing best practices and design patterns
-• **Infrastructure Evolution**: Implement API gateway patterns, event-driven architecture, and containerization strategies using Docker and Kubernetes
-
-## Technical Challenges You'll Solve
-• Transform a 500K+ line Django monolith processing financial transactions
-• Optimize Celery task processing across 14 specialized queues
-• Design resilient integration patterns for 22 third-party services with varying authentication methods
-• Reduce deployment cycles from 2 weeks to 2 days through service isolation
-• Implement comprehensive monitoring and observability for distributed systems
-
-## Required Qualifications
-• 8-12 years of backend development experience
-• 5+ years of Django expertise with deep understanding of Django REST Framework, Celery, and ORM optimization
-• Proven track record leading 2+ successful monolith-to-microservices transformations
-• Expert-level PostgreSQL skills with experience optimizing complex queries and database architecture
-• Strong API design skills (REST, GraphQL, gRPC) with understanding of versioning and backward compatibility
-• Experience with containerization (Docker) and orchestration (Kubernetes preferred)
-• Financial services domain knowledge, particularly in payments and compliance
-
-## Preferred Qualifications
-• Experience with AWS services (EC2, RDS, S3, API Gateway)
-• Familiarity with specific integrations: Galileo, Plaid, Twilio, or similar platforms
-• Spanish language skills (aligning with our user base)
-• Previous fintech or regulated industry experience
-• Contributions to open-source Django projects
-
-## What We Offer
-• Opportunity to impact millions of underserved users
-• Technical leadership role with significant architectural influence
-• Hybrid work flexibility (West Palm Beach office or remote)
-• Collaborative environment solving complex technical challenges
-• Growth trajectory as we expand 5x and add 190 new positions
-• Competitive compensation package including equity
-• Comprehensive benefits including health, 401k match, and unlimited PTO
-
-## Location
-West Palm Beach, FL (hybrid 2-3 days/week) or fully remote for exceptional candidates
-
-## How to Apply
-Submit your resume along with:
-1. A brief description of your most significant monolith decomposition project
-2. Examples of performance optimizations you've implemented at scale
-3. Your approach to managing technical debt while delivering features
-
-We're looking for someone who combines technical excellence with pragmatic delivery and shares our passion for financial inclusion. If you're ready to architect systems that change lives, we want to hear from you.
-
-*MyBambu is an equal opportunity employer committed to building a diverse and inclusive team.*</div>
+            <div class="posting-content" id="website-content">
+                <h2>Senior Middleware Architect</h2>
+                <h3>Transform Financial Access for 30 Million Underbanked Americans</h3>
+                
+                <div class="highlight-box">
+                    <p><strong>Location:</strong> West Palm Beach, FL (Hybrid) or Remote</p>
+                    <p><strong>Compensation:</strong> $150,000 - $175,000 base + equity + comprehensive benefits</p>
+                    <p><strong>Experience:</strong> 8-12 years backend, 5+ years Django</p>
+                </div>
+                
+                <h3>About MyBambu</h3>
+                <p>MyBambu is the leading digital financial platform serving Latino immigrants in the United States. We provide essential banking services to 20-30 million underbanked users who manage over $170 billion in annual remittances. Our mission is simple yet powerful: democratize access to financial services for those who need it most.</p>
+                
+                <h3>The Opportunity</h3>
+                <p>We're seeking a Senior Middleware Architect to lead the transformation of our Django monolith into a scalable microservices architecture. This is a rare opportunity to architect systems that directly impact millions of hardworking families while solving complex technical challenges at scale.</p>
+                
+                <p>You'll join at a pivotal moment as we scale from our current 30M user base to 50M+ over the next two years. Your architectural decisions will shape how millions of people send money home, pay bills, and build financial stability in America.</p>
+                
+                <h3>What You'll Do</h3>
+                <ul>
+                    <li><strong>Lead Architectural Transformation:</strong> Decompose our 52-app Django monolith into well-designed microservices while maintaining 99.9% uptime</li>
+                    <li><strong>Optimize Critical Systems:</strong> Eliminate 346 identified N+1 queries and reduce response times from 3-5 seconds to under 500ms</li>
+                    <li><strong>Design Integration Architecture:</strong> Architect resilient integration patterns for 22 third-party services including Galileo, Plaid, TabaPay, and MoneyGram</li>
+                    <li><strong>Scale Data Infrastructure:</strong> Optimize PostgreSQL performance handling 50,000+ daily transactions and implement intelligent caching strategies</li>
+                    <li><strong>Modernize Deployment Pipeline:</strong> Reduce deployment cycles from 2 weeks to 2 days through CI/CD improvements and service isolation</li>
+                    <li><strong>Mentor Engineering Teams:</strong> Guide 10+ engineers through the transformation, establishing best practices and architectural patterns</li>
+                    <li><strong>Drive Technical Strategy:</strong> Partner with leadership to define and execute the 3-year technical roadmap</li>
+                </ul>
+                
+                <h3>What You Bring</h3>
+                
+                <p><strong>Required Experience:</strong></p>
+                <ul>
+                    <li>8-12 years of backend development with 5+ years of Django production experience</li>
+                    <li>Successfully led 2+ monolith-to-microservices transformations at scale</li>
+                    <li>Deep expertise in PostgreSQL optimization, including query planning and index strategies</li>
+                    <li>Proven experience with distributed systems, message queues (Celery), and caching (Redis)</li>
+                    <li>Strong API design skills (REST, GraphQL, gRPC) with versioning and backward compatibility</li>
+                    <li>Experience with containerization (Docker, Kubernetes) and cloud platforms (AWS preferred)</li>
+                </ul>
+                
+                <p><strong>Preferred Qualifications:</strong></p>
+                <ul>
+                    <li>Financial services or fintech experience, especially in payments or banking</li>
+                    <li>Experience with high-compliance environments (PCI-DSS, SOC2)</li>
+                    <li>Knowledge of event-driven architectures and domain-driven design</li>
+                    <li>Familiarity with modern observability tools (DataDog, New Relic)</li>
+                    <li>Contributions to open source projects or technical thought leadership</li>
+                </ul>
+                
+                <h3>Technical Environment</h3>
+                <ul>
+                    <li><strong>Backend:</strong> Django 4.2.9, Django REST Framework, Python 3.x</li>
+                    <li><strong>Data:</strong> PostgreSQL, Redis, Celery with 15+ specialized queues</li>
+                    <li><strong>Integrations:</strong> 22 third-party APIs including banking, payments, and verification services</li>
+                    <li><strong>Infrastructure:</strong> AWS, Docker, GitHub Actions</li>
+                    <li><strong>Scale:</strong> 884 API endpoints, 50K+ daily transactions, 30M+ users</li>
+                </ul>
+                
+                <h3>What We Offer</h3>
+                <ul>
+                    <li><strong>Competitive Compensation:</strong> $150K-$175K base salary based on experience</li>
+                    <li><strong>Equity Participation:</strong> Meaningful equity stake in a high-growth fintech</li>
+                    <li><strong>Comprehensive Benefits:</strong> Medical, dental, vision, 401(k) with matching</li>
+                    <li><strong>Work-Life Balance:</strong> Flexible hybrid/remote options, unlimited PTO</li>
+                    <li><strong>Growth Opportunities:</strong> Direct path to Principal/Staff Engineer or Engineering Director</li>
+                    <li><strong>Impactful Mission:</strong> Your work directly improves financial access for millions</li>
+                </ul>
+                
+                <h3>Our Values</h3>
+                <ul>
+                    <li><strong>Inclusion First:</strong> We build for those traditionally excluded from financial services</li>
+                    <li><strong>Technical Excellence:</strong> We solve hard problems with elegant, scalable solutions</li>
+                    <li><strong>Customer Obsession:</strong> Every line of code impacts real families and communities</li>
+                    <li><strong>Continuous Learning:</strong> We invest in our team's growth and development</li>
+                </ul>
+                
+                <h3>Interview Process</h3>
+                <p>We respect your time and move quickly:</p>
+                <ul>
+                    <li><strong>Week 1:</strong> Initial recruiter screen (30 min) + Technical phone screen (60 min)</li>
+                    <li><strong>Week 2:</strong> Take-home challenge (4-6 hours) focused on service extraction</li>
+                    <li><strong>Week 3:</strong> Virtual onsite: Architecture (90 min), Technical (60 min), Leadership (45 min)</li>
+                    <li><strong>Week 4:</strong> Executive conversation + Reference checks + Offer</li>
+                </ul>
+                
+                <p><strong>Ready to transform financial access for millions?</strong> Apply with your resume and a brief note about the most challenging architectural transformation you've led. We're excited to learn about your experience decomposing monoliths, optimizing databases, and building resilient distributed systems.</p>
+                
+                <p><em>MyBambu is an equal opportunity employer committed to building a diverse and inclusive team. We welcome applications from all qualified candidates regardless of race, gender, age, religion, sexual orientation, or background.</em></p>
+            </div>
         </div>
         
         <!-- Usage Guidelines -->
         <section class="content-section">
-            <h2>📝 Usage Guidelines</h2>
-            
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; margin-top: 20px;">
+            <h2>📝 Posting Guidelines</h2>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px;">
                 <div>
-                    <h3>LinkedIn Strategy</h3>
-                    <ul style="color: var(--mid-gray); padding-left: 20px;">
-                        <li>Post during peak hours (Tue-Thu, 9-11 AM EST)</li>
-                        <li>Tag relevant hashtags: #Django #Python #Fintech #Microservices</li>
-                        <li>Share in relevant groups and ask team to amplify</li>
-                        <li>Follow up with targeted outreach to potential candidates</li>
-                        <li>Pin post to company page for maximum visibility</li>
+                    <h3>LinkedIn Best Practices</h3>
+                    <ul style="color: var(--mid-gray);">
+                        <li>Post during peak hours (Tue-Thu, 9-11 AM)</li>
+                        <li>Include relevant hashtags: #hiring #middleware #django #fintech</li>
+                        <li>Tag team members for increased reach</li>
+                        <li>Use LinkedIn's "We're Hiring" frame</li>
+                        <li>Share in relevant groups</li>
                     </ul>
                 </div>
-                
                 <div>
-                    <h3>Website Posting</h3>
-                    <ul style="color: var(--mid-gray); padding-left: 20px;">
-                        <li>Use as primary careers page content</li>
-                        <li>Upload to job boards (Indeed, AngelList, StackOverflow)</li>
-                        <li>Include in recruiter outreach emails</li>
-                        <li>Add to GitHub README for open source visibility</li>
-                        <li>Reference in technical conference presentations</li>
+                    <h3>Website Optimization</h3>
+                    <ul style="color: var(--mid-gray);">
+                        <li>Include location in title for SEO</li>
+                        <li>Add schema markup for job postings</li>
+                        <li>Link to team/culture pages</li>
+                        <li>Include "Apply Now" CTA buttons</li>
+                        <li>Add employee testimonials nearby</li>
                     </ul>
-                </div>
-                
-                <div>
-                    <h3>Customization Options</h3>
-                    <ul style="color: var(--mid-gray); padding-left: 20px;">
-                        <li>Adjust salary ranges based on final budget approval</li>
-                        <li>Modify location requirements if remote-first decided</li>
-                        <li>Add specific tech stack requirements as needed</li>
-                        <li>Include diversity statements for inclusive recruiting</li>
-                        <li>Add team introduction videos or culture links</li>
-                    </ul>
-                </div>
-            </div>
-        </section>
-        
-        <!-- Performance Tracking -->
-        <section class="content-section">
-            <h2>📊 Performance Tracking</h2>
-            <p style="color: var(--mid-gray); font-size: 1.1em; margin-bottom: 25px;">Track these metrics to optimize posting performance and reach qualified candidates effectively.</p>
-            
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px;">
-                <div class="stat-card">
-                    <div class="stat-label">LinkedIn Views</div>
-                    <div style="color: var(--mid-gray); margin-top: 8px;">Target: 5,000+ views</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-label">Applications</div>
-                    <div style="color: var(--mid-gray); margin-top: 8px;">Target: 100+ qualified</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-label">Engagement Rate</div>
-                    <div style="color: var(--mid-gray); margin-top: 8px;">Target: 5%+ interaction</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-label">Quality Score</div>
-                    <div style="color: var(--mid-gray); margin-top: 8px;">Target: 60%+ qualified</div>
                 </div>
             </div>
         </section>
@@ -370,47 +390,27 @@ We're looking for someone who combines technical excellence with pragmatic deliv
         // Copy to clipboard functionality
         function copyToClipboard(elementId, button) {
             const element = document.getElementById(elementId);
-            const text = element.textContent || element.innerText;
+            const text = element.innerText;
             
-            navigator.clipboard.writeText(text).then(function() {
-                // Success
-                button.innerHTML = '✅ Copied!';
+            navigator.clipboard.writeText(text).then(() => {
+                button.innerHTML = '✓ Copied!';
                 button.classList.add('copied');
                 
-                setTimeout(function() {
-                    button.innerHTML = '📋 Copy Text';
-                    button.classList.remove('copied');
-                }, 2000);
-            }, function(err) {
-                // Fallback for older browsers
-                const textArea = document.createElement('textarea');
-                textArea.value = text;
-                document.body.appendChild(textArea);
-                textArea.select();
-                document.execCommand('copy');
-                document.body.removeChild(textArea);
-                
-                button.innerHTML = '✅ Copied!';
-                button.classList.add('copied');
-                
-                setTimeout(function() {
+                setTimeout(() => {
                     button.innerHTML = '📋 Copy Text';
                     button.classList.remove('copied');
                 }, 2000);
             });
         }
         
-        // Character count functionality
-        function updateCharacterCount() {
-            const linkedinContent = document.getElementById('linkedin-content').textContent;
-            const websiteContent = document.getElementById('website-content').textContent;
+        // Character counting
+        document.addEventListener('DOMContentLoaded', () => {
+            const linkedinContent = document.getElementById('linkedin-content').innerText;
+            const websiteContent = document.getElementById('website-content').innerText;
             
             document.getElementById('linkedin-count').textContent = linkedinContent.length;
             document.getElementById('website-count').textContent = websiteContent.length;
-        }
-        
-        // Update character counts on page load
-        document.addEventListener('DOMContentLoaded', updateCharacterCount);
+        });
     </script>
 </body>
 </html>

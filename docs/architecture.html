@@ -3,13 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MyBambu Middleware Architecture Diagram</title>
+    <title>MyBambu Middleware Architect</title>
     <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
     
     <!-- Google Fonts for Nunito and Poppins -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Shared Styles -->
+    <link rel="stylesheet" href="styles.css">
     
     <script>
         mermaid.initialize({ 
@@ -112,7 +115,109 @@
             border-radius: 12px;
             padding: 30px;
             border: 1px solid var(--light-border);
-            overflow-x: auto;
+            overflow: auto;
+            position: relative;
+            max-height: 80vh;
+        }
+        
+        .diagram-wrapper {
+            display: inline-block;
+            transition: transform 0.3s ease;
+            transform-origin: center center;
+            cursor: move;
+        }
+        
+        .zoom-controls {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: var(--brand-white);
+            border-radius: 8px;
+            padding: 8px;
+            display: flex;
+            gap: 8px;
+            box-shadow: 0 2px 10px rgba(13, 23, 82, 0.1);
+            border: 1px solid var(--light-border);
+            z-index: 10;
+        }
+        
+        .zoom-btn {
+            width: 36px;
+            height: 36px;
+            border: 1px solid var(--light-border);
+            background: var(--brand-white);
+            border-radius: 6px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            color: var(--brand-blue-dark);
+            transition: all 0.2s ease;
+        }
+        
+        .zoom-btn:hover {
+            background: var(--brand-green-primary);
+            border-color: var(--brand-green-primary);
+            transform: scale(1.1);
+        }
+        
+        .zoom-btn:active {
+            transform: scale(0.95);
+        }
+        
+        .zoom-level {
+            display: flex;
+            align-items: center;
+            padding: 0 10px;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            color: var(--brand-blue-dark);
+            font-size: 14px;
+            min-width: 60px;
+            justify-content: center;
+        }
+        
+        .fullscreen-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.98);
+            z-index: 9999;
+            display: none;
+            overflow: auto;
+            padding: 40px;
+        }
+        
+        .fullscreen-overlay.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .fullscreen-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 40px;
+            height: 40px;
+            background: var(--brand-blue-dark);
+            color: var(--brand-white);
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+        
+        .fullscreen-close:hover {
+            background: var(--brand-green-primary);
+            transform: rotate(90deg);
         }
         
         .legend {
@@ -233,6 +338,28 @@
     </style>
 </head>
 <body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="nav-brand">
+                <svg class="nav-logo" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg">
+                    <rect width="60" height="60" rx="12" fill="#27FB6B"/>
+                    <path d="M20 20v20h8v-8h4v8h8V20h-8v8h-4v-8h-8z" fill="#0D1752"/>
+                </svg>
+                <span class="nav-title">MyBambu Hiring</span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="index.html" class="nav-link">Home</a></li>
+                <li><a href="hiring-dashboard.html" class="nav-link">Dashboard</a></li>
+                <li><a href="job-postings.html" class="nav-link">Job Postings</a></li>
+                <li><a href="coding-challenge.html" class="nav-link">Challenge</a></li>
+                <li><a href="interview-guide.html" class="nav-link">Interview</a></li>
+                <li><a href="architecture.html" class="nav-link active">Architecture</a></li>
+                <li><a href="resources.html" class="nav-link">Resources</a></li>
+            </ul>
+        </div>
+    </nav>
+    
     <div class="container">
         <div class="header">
             <div class="logo-container">
@@ -274,7 +401,15 @@
             </div>
         </div>
         
-        <div class="diagram-container">
+        <div class="diagram-container" id="diagramContainer">
+            <div class="zoom-controls">
+                <button class="zoom-btn" onclick="zoomIn()" title="Zoom In">+</button>
+                <div class="zoom-level" id="zoomLevel">100%</div>
+                <button class="zoom-btn" onclick="zoomOut()" title="Zoom Out">-</button>
+                <button class="zoom-btn" onclick="resetZoom()" title="Reset Zoom">🔄</button>
+                <button class="zoom-btn" onclick="toggleFullscreen()" title="Fullscreen">🔳</button>
+            </div>
+            <div class="diagram-wrapper" id="diagramWrapper">
             <div class="mermaid">
                 graph TB
                     subgraph "Client Layer"
@@ -366,6 +501,15 @@
                     class Auth,Account,Trans,Cards,CrossBorder coreClass
                     class Galileo,Plaid,FIS,TabaPay,AstroPay,Uniteller,MoneyGram,Persona,Veriff,DataVisor integrationClass
             </div>
+            </div>
+        </div>
+        
+        <!-- Fullscreen Overlay -->
+        <div class="fullscreen-overlay" id="fullscreenOverlay">
+            <button class="fullscreen-close" onclick="toggleFullscreen()">×</button>
+            <div style="max-width: 90%; max-height: 90%; overflow: auto;">
+                <div id="fullscreenDiagram"></div>
+            </div>
         </div>
         
         <div class="legend">
@@ -398,6 +542,12 @@
             </div>
         </div>
         
+        <div style="text-align: center; margin: 40px 0;">
+            <a href="index.html" class="btn btn-primary" style="display: inline-flex; align-items: center; gap: 10px; padding: 14px 28px; background: var(--brand-green-primary); color: var(--brand-blue-dark); text-decoration: none; border-radius: 8px; font-weight: 600; transition: all 0.3s ease;">
+                ← Back to Home
+            </a>
+        </div>
+        
         <footer>
             <svg class="footer-logo" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg">
                 <rect width="60" height="60" rx="12" fill="#27FB6B" opacity="0.7"/>
@@ -407,5 +557,112 @@
             <p>Transform Django Monolith → Microservices Architecture</p>
         </footer>
     </div>
+    
+    <script>
+        let currentZoom = 1;
+        const zoomStep = 0.2;
+        const maxZoom = 3;
+        const minZoom = 0.5;
+        
+        function updateZoomDisplay() {
+            document.getElementById('zoomLevel').textContent = Math.round(currentZoom * 100) + '%';
+            document.getElementById('diagramWrapper').style.transform = `scale(${currentZoom})`;
+        }
+        
+        function zoomIn() {
+            if (currentZoom < maxZoom) {
+                currentZoom = Math.min(currentZoom + zoomStep, maxZoom);
+                updateZoomDisplay();
+            }
+        }
+        
+        function zoomOut() {
+            if (currentZoom > minZoom) {
+                currentZoom = Math.max(currentZoom - zoomStep, minZoom);
+                updateZoomDisplay();
+            }
+        }
+        
+        function resetZoom() {
+            currentZoom = 1;
+            updateZoomDisplay();
+        }
+        
+        function toggleFullscreen() {
+            const overlay = document.getElementById('fullscreenOverlay');
+            const fullscreenDiagram = document.getElementById('fullscreenDiagram');
+            
+            if (overlay.classList.contains('active')) {
+                overlay.classList.remove('active');
+                fullscreenDiagram.innerHTML = '';
+            } else {
+                overlay.classList.add('active');
+                // Clone the mermaid diagram
+                const originalDiagram = document.querySelector('.mermaid').cloneNode(true);
+                fullscreenDiagram.innerHTML = '';
+                fullscreenDiagram.appendChild(originalDiagram);
+                // Re-render mermaid in fullscreen
+                mermaid.init(undefined, fullscreenDiagram.querySelector('.mermaid'));
+            }
+        }
+        
+        // Allow dragging to pan the diagram
+        let isDragging = false;
+        let startX, startY, scrollLeft, scrollTop;
+        const container = document.getElementById('diagramContainer');
+        
+        container.addEventListener('mousedown', (e) => {
+            if (e.target.closest('.zoom-controls')) return;
+            isDragging = true;
+            container.style.cursor = 'grabbing';
+            startX = e.pageX - container.offsetLeft;
+            startY = e.pageY - container.offsetTop;
+            scrollLeft = container.scrollLeft;
+            scrollTop = container.scrollTop;
+        });
+        
+        container.addEventListener('mouseleave', () => {
+            isDragging = false;
+            container.style.cursor = 'move';
+        });
+        
+        container.addEventListener('mouseup', () => {
+            isDragging = false;
+            container.style.cursor = 'move';
+        });
+        
+        container.addEventListener('mousemove', (e) => {
+            if (!isDragging) return;
+            e.preventDefault();
+            const x = e.pageX - container.offsetLeft;
+            const y = e.pageY - container.offsetTop;
+            const walkX = (x - startX) * 1.5;
+            const walkY = (y - startY) * 1.5;
+            container.scrollLeft = scrollLeft - walkX;
+            container.scrollTop = scrollTop - walkY;
+        });
+        
+        // Keyboard shortcuts
+        document.addEventListener('keydown', (e) => {
+            if (e.ctrlKey || e.metaKey) {
+                if (e.key === '=' || e.key === '+') {
+                    e.preventDefault();
+                    zoomIn();
+                } else if (e.key === '-') {
+                    e.preventDefault();
+                    zoomOut();
+                } else if (e.key === '0') {
+                    e.preventDefault();
+                    resetZoom();
+                }
+            }
+            if (e.key === 'Escape') {
+                const overlay = document.getElementById('fullscreenOverlay');
+                if (overlay.classList.contains('active')) {
+                    toggleFullscreen();
+                }
+            }
+        });
+    </script>
 </body>
 </html>

@@ -3,13 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MyBambu Middleware Architect Hiring Dashboard</title>
+    <title>MyBambu Middleware Architect</title>
     <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
     
     <!-- Google Fonts for Nunito and Poppins -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Shared Styles -->
+    <link rel="stylesheet" href="styles.css">
     
     <style>
         :root {
@@ -483,6 +486,28 @@
     </style>
 </head>
 <body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="nav-brand">
+                <svg class="nav-logo" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg">
+                    <rect width="60" height="60" rx="12" fill="#27FB6B"/>
+                    <path d="M20 20v20h8v-8h4v8h8V20h-8v8h-4v-8h-8z" fill="#0D1752"/>
+                </svg>
+                <span class="nav-title">MyBambu Hiring</span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="index.html" class="nav-link">Home</a></li>
+                <li><a href="hiring-dashboard.html" class="nav-link active">Dashboard</a></li>
+                <li><a href="job-postings.html" class="nav-link">Job Postings</a></li>
+                <li><a href="coding-challenge.html" class="nav-link">Challenge</a></li>
+                <li><a href="interview-guide.html" class="nav-link">Interview</a></li>
+                <li><a href="architecture.html" class="nav-link">Architecture</a></li>
+                <li><a href="resources.html" class="nav-link">Resources</a></li>
+            </ul>
+        </div>
+    </nav>
+    
     <div class="container">
         <header>
             <div class="logo-container">
@@ -739,17 +764,23 @@
         </div>
         
         <div class="action-buttons">
-            <a href="../planning/phase-1-analysis/phase-1-summary.md" class="btn btn-primary">
-                📄 View Analysis Report
+            <a href="job-postings.html" class="btn btn-primary">
+                📄 View Job Postings
             </a>
-            <a href="job-posting-linkedin.md" class="btn btn-secondary">
+            <a href="https://github.com/pwatson-mybambu/bambu-new-hire-mw/blob/main/deliverables/job-posting-linkedin.md" class="btn btn-secondary" target="_blank">
                 💼 LinkedIn Job Post
             </a>
-            <a href="coding-challenge-package/README.md" class="btn btn-secondary">
+            <a href="https://github.com/pwatson-mybambu/bambu-mw-challenge" class="btn btn-secondary" target="_blank">
                 💻 Coding Challenge
             </a>
-            <a href="interview-guide.md" class="btn btn-secondary">
+            <a href="https://github.com/pwatson-mybambu/bambu-new-hire-mw/blob/main/deliverables/interview-guide.md" class="btn btn-secondary" target="_blank">
                 🎯 Interview Guide
+            </a>
+        </div>
+        
+        <div style="text-align: center; margin: 40px 0;">
+            <a href="index.html" style="display: inline-flex; align-items: center; gap: 10px; padding: 14px 28px; background: var(--brand-green-primary); color: var(--brand-blue-dark); text-decoration: none; border-radius: 8px; font-weight: 600; transition: all 0.3s ease; font-family: 'Poppins', sans-serif;">
+                ← Back to Home
             </a>
         </div>
         
