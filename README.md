@@ -4,13 +4,17 @@
 
 This repository contains a complete hiring package for the MyBambu Middleware Architect position. All materials are ready for immediate use.
 
-### 🌐 View HTML Visualizations
+### 🌐 View Complete Hiring Portal
 
-**Live Interactive Views (GitHub Pages):**
-- **[📊 Hiring Dashboard](https://pwatson-mybambu.github.io/bambu-new-hire-mw/deliverables/hiring-dashboard.html)** - Complete visual overview of the hiring process  
-- **[🏗️ Architecture Diagram](https://pwatson-mybambu.github.io/bambu-new-hire-mw/docs/architecture-diagram.html)** - Interactive middleware architecture visualization
+**[🚀 Visit the Full Interactive Portal](https://pwatson-mybambu.github.io/bambu-new-hire-mw/)**
 
-> **Note**: These links use GitHub Pages for direct HTML rendering with full MyBambu branding!
+The portal includes:
+- **[📊 Hiring Dashboard](https://pwatson-mybambu.github.io/bambu-new-hire-mw/hiring-dashboard.html)** - Interactive process overview
+- **[💼 Job Postings](https://pwatson-mybambu.github.io/bambu-new-hire-mw/job-postings.html)** - LinkedIn & website versions
+- **[💻 Coding Challenge](https://pwatson-mybambu.github.io/bambu-new-hire-mw/coding-challenge.html)** - Technical assessment
+- **[🎯 Interview Guide](https://pwatson-mybambu.github.io/bambu-new-hire-mw/interview-guide.html)** - Questions & evaluation
+- **[🏗️ Architecture](https://pwatson-mybambu.github.io/bambu-new-hire-mw/architecture.html)** - System overview
+- **[📚 Resources](https://pwatson-mybambu.github.io/bambu-new-hire-mw/resources.html)** - Downloads & materials
 
 ## Position Overview
 

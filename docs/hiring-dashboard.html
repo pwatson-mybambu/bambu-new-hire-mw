@@ -1,0 +1,805 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MyBambu Middleware Architect Hiring Dashboard</title>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+    
+    <!-- Google Fonts for Nunito and Poppins -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            /* MyBambu Brand Colors */
+            --brand-blue-dark: #0D1752;
+            --brand-blue-action: #296BFF;
+            --brand-green-primary: #27FB6B;
+            --brand-green-legacy: #70E242;
+            --brand-white: #FFFFFF;
+            --ghost-white: #F2F4FF;
+            --light-border: #DEE7FF;
+            --mid-border: #C5C5C5;
+            --dark-gray: #1B1B22;
+            --mid-gray: #46495C;
+            --light-gray: #F1F1F1;
+            --error-red: #FF0000;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Nunito', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: var(--brand-blue-dark);
+            background: linear-gradient(135deg, var(--ghost-white) 0%, #E8F4FF 100%);
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            background: var(--brand-white);
+            border-radius: 16px;
+            padding: 40px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 40px rgba(13, 23, 82, 0.08);
+            border: 1px solid var(--light-border);
+        }
+        
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .logo-svg {
+            width: 60px;
+            height: 60px;
+        }
+        
+        .brand-text {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .brand-name {
+            font-family: 'Poppins', sans-serif;
+            font-size: 32px;
+            font-weight: 700;
+            color: var(--brand-blue-dark);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .brand-tagline {
+            font-size: 14px;
+            color: var(--mid-gray);
+            font-weight: 400;
+        }
+        
+        h1 {
+            color: var(--brand-blue-dark);
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 700;
+        }
+        
+        .subtitle {
+            color: var(--mid-gray);
+            font-size: 1.2em;
+            font-weight: 400;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+        
+        .stat-card {
+            background: var(--ghost-white);
+            padding: 24px;
+            border-radius: 12px;
+            text-align: center;
+            border: 1px solid var(--light-border);
+            transition: all 0.3s ease;
+        }
+        
+        .stat-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 20px rgba(39, 251, 107, 0.15);
+            border-color: var(--brand-green-primary);
+        }
+        
+        .stat-number {
+            font-size: 2.2em;
+            font-weight: 800;
+            color: var(--brand-green-primary);
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        .stat-label {
+            color: var(--mid-gray);
+            margin-top: 8px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-size: 0.85em;
+        }
+        
+        .phase-navigation {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .phase-card {
+            background: var(--brand-white);
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 4px 20px rgba(13, 23, 82, 0.06);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: 2px solid transparent;
+        }
+        
+        .phase-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 30px rgba(39, 251, 107, 0.2);
+            border-color: var(--brand-green-primary);
+        }
+        
+        .phase-card.active {
+            border-color: var(--brand-green-primary);
+            background: linear-gradient(135deg, rgba(39, 251, 107, 0.05) 0%, rgba(41, 107, 255, 0.05) 100%);
+        }
+        
+        .phase-number {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            background: var(--brand-green-primary);
+            color: var(--brand-blue-dark);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            margin-bottom: 15px;
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        .phase-title {
+            font-size: 1.3em;
+            font-weight: 700;
+            color: var(--brand-blue-dark);
+            margin-bottom: 10px;
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        .phase-description {
+            color: var(--mid-gray);
+            line-height: 1.6;
+        }
+        
+        .phase-content {
+            display: none;
+            background: var(--brand-white);
+            border-radius: 12px;
+            padding: 40px;
+            box-shadow: 0 10px 40px rgba(13, 23, 82, 0.08);
+            margin-bottom: 30px;
+            border: 1px solid var(--light-border);
+        }
+        
+        .phase-content.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .mermaid {
+            background: var(--ghost-white);
+            padding: 30px;
+            border-radius: 12px;
+            border: 1px solid var(--light-border);
+        }
+        
+        .key-findings {
+            background: linear-gradient(135deg, rgba(39, 251, 107, 0.1) 0%, rgba(41, 107, 255, 0.1) 100%);
+            border-radius: 12px;
+            padding: 30px;
+            margin: 30px 0;
+            border-left: 4px solid var(--brand-green-primary);
+        }
+        
+        .key-findings h3 {
+            color: var(--brand-blue-dark);
+            margin-bottom: 20px;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 700;
+        }
+        
+        .key-findings ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        
+        .key-findings li {
+            padding: 12px 0;
+            border-bottom: 1px solid rgba(13, 23, 82, 0.1);
+            position: relative;
+            padding-left: 30px;
+        }
+        
+        .key-findings li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: var(--brand-green-primary);
+            font-weight: bold;
+            font-size: 1.2em;
+        }
+        
+        .key-findings li:last-child {
+            border-bottom: none;
+        }
+        
+        .deliverables-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+        
+        .deliverable-card {
+            background: var(--brand-white);
+            border-radius: 12px;
+            padding: 25px;
+            border: 1px solid var(--light-border);
+            transition: all 0.3s ease;
+        }
+        
+        .deliverable-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 25px rgba(39, 251, 107, 0.15);
+            border-color: var(--brand-green-primary);
+        }
+        
+        .deliverable-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--brand-green-primary);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 15px;
+            font-size: 1.5em;
+        }
+        
+        .deliverable-title {
+            font-weight: 700;
+            color: var(--brand-blue-dark);
+            margin-bottom: 10px;
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        .deliverable-description {
+            color: var(--mid-gray);
+            font-size: 0.95em;
+            line-height: 1.6;
+        }
+        
+        .timeline {
+            position: relative;
+            padding-left: 40px;
+            margin: 30px 0;
+        }
+        
+        .timeline:before {
+            content: '';
+            position: absolute;
+            left: 10px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: var(--brand-green-primary);
+        }
+        
+        .timeline-item {
+            position: relative;
+            padding-bottom: 30px;
+        }
+        
+        .timeline-item:before {
+            content: '';
+            position: absolute;
+            left: -35px;
+            top: 5px;
+            width: 12px;
+            height: 12px;
+            background: var(--brand-green-primary);
+            border-radius: 50%;
+            box-shadow: 0 0 0 4px var(--brand-white), 0 0 0 6px var(--brand-green-primary);
+        }
+        
+        .timeline-week {
+            font-weight: 700;
+            color: var(--brand-blue-dark);
+            margin-bottom: 5px;
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        .timeline-tasks {
+            color: var(--mid-gray);
+            padding-left: 20px;
+        }
+        
+        .action-buttons {
+            display: flex;
+            gap: 15px;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+        
+        .btn {
+            padding: 14px 28px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            border: 2px solid transparent;
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        .btn-primary {
+            background: var(--brand-green-primary);
+            color: var(--brand-blue-dark);
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(39, 251, 107, 0.3);
+        }
+        
+        .btn-secondary {
+            background: var(--brand-white);
+            color: var(--brand-blue-dark);
+            border-color: var(--light-border);
+        }
+        
+        .btn-secondary:hover {
+            border-color: var(--brand-green-primary);
+            background: rgba(39, 251, 107, 0.05);
+        }
+        
+        .scoring-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 30px 0;
+            border-radius: 12px;
+            overflow: hidden;
+        }
+        
+        .scoring-table thead {
+            background: var(--brand-blue-dark);
+            color: var(--brand-white);
+        }
+        
+        .scoring-table th {
+            padding: 18px;
+            text-align: left;
+            font-weight: 600;
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        .scoring-table tbody tr {
+            border-bottom: 1px solid var(--light-border);
+        }
+        
+        .scoring-table tbody tr:hover {
+            background: rgba(39, 251, 107, 0.05);
+        }
+        
+        .scoring-table td {
+            padding: 16px 18px;
+        }
+        
+        .badge {
+            display: inline-block;
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 0.85em;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .badge-success {
+            background: rgba(39, 251, 107, 0.2);
+            color: #0D6E2F;
+        }
+        
+        .badge-warning {
+            background: rgba(255, 193, 7, 0.2);
+            color: #664D03;
+        }
+        
+        .badge-info {
+            background: rgba(41, 107, 255, 0.2);
+            color: var(--brand-blue-dark);
+        }
+        
+        footer {
+            background: var(--brand-white);
+            border-radius: 12px;
+            padding: 30px;
+            margin-top: 40px;
+            text-align: center;
+            border: 1px solid var(--light-border);
+        }
+        
+        footer p {
+            color: var(--mid-gray);
+            font-size: 0.95em;
+        }
+        
+        .footer-logo {
+            width: 40px;
+            height: 40px;
+            margin: 0 auto 15px;
+            opacity: 0.7;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo-container">
+                <!-- MyBambu Logo SVG -->
+                <svg class="logo-svg" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg">
+                    <rect width="60" height="60" rx="12" fill="#27FB6B"/>
+                    <path d="M20 20v20h8v-8h4v8h8V20h-8v8h-4v-8h-8z" fill="#0D1752"/>
+                </svg>
+                <div class="brand-text">
+                    <div class="brand-name">
+                        MyBambu
+                        <span style="color: #27FB6B; font-size: 0.4em;">●</span>
+                        Hiring Dashboard
+                    </div>
+                    <div class="brand-tagline">Middleware Architect Recruitment</div>
+                </div>
+            </div>
+            
+            <h1>Middleware Architect Hiring Process</h1>
+            <p class="subtitle">Transform our Django monolith into a scalable microservices architecture</p>
+            
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-number">$150-175K</div>
+                    <div class="stat-label">Base Salary</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">45 Days</div>
+                    <div class="stat-label">Time to Fill</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">70%</div>
+                    <div class="stat-label">Performance Goal</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">30M</div>
+                    <div class="stat-label">Users Impacted</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">52 Apps</div>
+                    <div class="stat-label">Django Modules</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">22</div>
+                    <div class="stat-label">Integrations</div>
+                </div>
+            </div>
+        </header>
+        
+        <div class="phase-navigation">
+            <div class="phase-card active" onclick="showPhase('analysis')">
+                <div class="phase-number">1</div>
+                <div class="phase-title">Architecture Analysis</div>
+                <div class="phase-description">Current state assessment and pain points identification</div>
+            </div>
+            <div class="phase-card" onclick="showPhase('requirements')">
+                <div class="phase-number">2</div>
+                <div class="phase-title">Requirements Definition</div>
+                <div class="phase-description">Job description and ideal candidate profile</div>
+            </div>
+            <div class="phase-card" onclick="showPhase('evaluation')">
+                <div class="phase-number">3</div>
+                <div class="phase-title">Evaluation Framework</div>
+                <div class="phase-description">Interview process and coding challenge</div>
+            </div>
+        </div>
+        
+        <!-- Phase 1: Architecture Analysis -->
+        <div id="phase-analysis" class="phase-content active">
+            <h2>Phase 1: Architecture Analysis</h2>
+            
+            <div class="key-findings">
+                <h3>🔍 Key Technical Findings</h3>
+                <ul>
+                    <li><strong>Monolithic Architecture:</strong> 52 Django apps with 884 API endpoints tightly coupled</li>
+                    <li><strong>Performance Issues:</strong> 346 N+1 queries causing 3-5 second response times</li>
+                    <li><strong>Database Bottleneck:</strong> Single PostgreSQL instance handling 50K+ transactions/day</li>
+                    <li><strong>Complex Integrations:</strong> 22 third-party services without proper abstraction layer</li>
+                    <li><strong>Queue Complexity:</strong> 15+ Celery queues with interdependencies</li>
+                    <li><strong>Deployment Risk:</strong> 2-week deployment cycles affecting entire system</li>
+                </ul>
+            </div>
+            
+            <div class="mermaid">
+                graph TB
+                    subgraph "Current State Analysis"
+                        A[Django Monolith] --> B[52 Apps]
+                        B --> C[884 Endpoints]
+                        C --> D[22 Integrations]
+                        D --> E[Performance Issues]
+                        E --> F[346 N+1 Queries]
+                        F --> G[3-5s Response Times]
+                    end
+                    
+                    subgraph "Business Impact"
+                        H[30M Users] --> I[50K Transactions/Day]
+                        I --> J[$170B Annual Volume]
+                        J --> K[Scaling Challenges]
+                    end
+                    
+                    subgraph "Technical Debt"
+                        L[2-Week Deployments] --> M[High Risk]
+                        M --> N[Limited Innovation]
+                        N --> O[Team Frustration]
+                    end
+                    
+                    A --> H
+                    E --> K
+                    G --> O
+            </div>
+        </div>
+        
+        <!-- Phase 2: Requirements Definition -->
+        <div id="phase-requirements" class="phase-content">
+            <h2>Phase 2: Requirements Definition</h2>
+            
+            <div class="key-findings">
+                <h3>📋 Position Requirements</h3>
+                <ul>
+                    <li><strong>Experience:</strong> 8-12 years backend, 5+ years Django production</li>
+                    <li><strong>Proven Success:</strong> 2+ monolith decompositions completed</li>
+                    <li><strong>Technical Depth:</strong> PostgreSQL optimization, distributed systems</li>
+                    <li><strong>Domain Knowledge:</strong> Financial services and payment processing</li>
+                    <li><strong>Leadership:</strong> Ability to guide 10+ engineers through transformation</li>
+                    <li><strong>Communication:</strong> Executive-level technical articulation</li>
+                </ul>
+            </div>
+            
+            <div class="deliverables-grid">
+                <div class="deliverable-card">
+                    <div class="deliverable-icon">📝</div>
+                    <div class="deliverable-title">LinkedIn Job Post</div>
+                    <div class="deliverable-description">150-word optimized posting for maximum reach and engagement</div>
+                </div>
+                <div class="deliverable-card">
+                    <div class="deliverable-icon">🌐</div>
+                    <div class="deliverable-title">Website Job Post</div>
+                    <div class="deliverable-description">500-word detailed description with technical requirements</div>
+                </div>
+                <div class="deliverable-card">
+                    <div class="deliverable-icon">👤</div>
+                    <div class="deliverable-title">Candidate Profile</div>
+                    <div class="deliverable-description">Ideal background, skills, and experience mapping</div>
+                </div>
+            </div>
+            
+            <div class="mermaid">
+                graph LR
+                    subgraph "Must-Have Skills"
+                        A[Django Expert] --> B[Microservices]
+                        B --> C[PostgreSQL]
+                        C --> D[API Design]
+                        D --> E[Celery/Queues]
+                    end
+                    
+                    subgraph "Nice-to-Have"
+                        F[Financial Services] --> G[Payment Systems]
+                        G --> H[Compliance]
+                        H --> I[High Volume]
+                    end
+                    
+                    subgraph "Leadership"
+                        J[Technical Vision] --> K[Team Guidance]
+                        K --> L[Stakeholder Mgmt]
+                        L --> M[Change Agent]
+                    end
+                    
+                    E --> F
+                    I --> J
+            </div>
+        </div>
+        
+        <!-- Phase 3: Evaluation Framework -->
+        <div id="phase-evaluation" class="phase-content">
+            <h2>Phase 3: Evaluation Framework</h2>
+            
+            <table class="scoring-table">
+                <thead>
+                    <tr>
+                        <th>Component</th>
+                        <th>Weight</th>
+                        <th>Minimum Score</th>
+                        <th>Focus Areas</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Coding Challenge</strong></td>
+                        <td><span class="badge badge-success">40%</span></td>
+                        <td>28/40 points</td>
+                        <td>Service extraction, API design, error handling</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Technical Interview</strong></td>
+                        <td><span class="badge badge-info">35%</span></td>
+                        <td>24/35 points</td>
+                        <td>Architecture patterns, Django expertise, scaling</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Leadership Assessment</strong></td>
+                        <td><span class="badge badge-warning">15%</span></td>
+                        <td>9/15 points</td>
+                        <td>Team guidance, stakeholder management</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Team Fit</strong></td>
+                        <td><span class="badge badge-warning">10%</span></td>
+                        <td>6/10 points</td>
+                        <td>Culture alignment, collaboration style</td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <div class="deliverables-grid">
+                <div class="deliverable-card">
+                    <div class="deliverable-icon">💻</div>
+                    <div class="deliverable-title">Coding Challenge</div>
+                    <div class="deliverable-description">Real-world notification service extraction with Docker setup</div>
+                </div>
+                <div class="deliverable-card">
+                    <div class="deliverable-icon">🎯</div>
+                    <div class="deliverable-title">Interview Guide</div>
+                    <div class="deliverable-description">50+ technical questions across all expertise areas</div>
+                </div>
+                <div class="deliverable-card">
+                    <div class="deliverable-icon">📊</div>
+                    <div class="deliverable-title">Evaluation Rubric</div>
+                    <div class="deliverable-description">100-point scoring system with clear criteria</div>
+                </div>
+            </div>
+            
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-week">Week 1: Launch</div>
+                    <div class="timeline-tasks">Post job, activate sourcing channels, brief recruiters</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-week">Week 2-3: Screening</div>
+                    <div class="timeline-tasks">Resume review, phone screens, send coding challenges</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-week">Week 4-5: Technical Assessment</div>
+                    <div class="timeline-tasks">Review submissions, technical interviews, deep-dives</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-week">Week 6: Final Evaluation</div>
+                    <div class="timeline-tasks">System design, behavioral assessment, executive review</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-week">Week 7: Decision</div>
+                    <div class="timeline-tasks">Reference checks, offer negotiation, close candidate</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="action-buttons">
+            <a href="../planning/phase-1-analysis/phase-1-summary.md" class="btn btn-primary">
+                📄 View Analysis Report
+            </a>
+            <a href="job-posting-linkedin.md" class="btn btn-secondary">
+                💼 LinkedIn Job Post
+            </a>
+            <a href="coding-challenge-package/README.md" class="btn btn-secondary">
+                💻 Coding Challenge
+            </a>
+            <a href="interview-guide.md" class="btn btn-secondary">
+                🎯 Interview Guide
+            </a>
+        </div>
+        
+        <footer>
+            <svg class="footer-logo" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg">
+                <rect width="60" height="60" rx="12" fill="#27FB6B" opacity="0.7"/>
+                <path d="M20 20v20h8v-8h4v8h8V20h-8v8h-4v-8h-8z" fill="#0D1752"/>
+            </svg>
+            <p><strong>MyBambu</strong> • Middleware Architect Hiring Dashboard</p>
+            <p>Transforming financial services for 30 million underbanked Americans</p>
+        </footer>
+    </div>
+    
+    <script>
+        // Initialize Mermaid
+        mermaid.initialize({ 
+            startOnLoad: true,
+            theme: 'base',
+            themeVariables: {
+                primaryColor: '#27FB6B',
+                primaryTextColor: '#0D1752',
+                primaryBorderColor: '#0D1752',
+                lineColor: '#296BFF',
+                secondaryColor: '#F2F4FF',
+                tertiaryColor: '#DEE7FF',
+                background: '#FFFFFF',
+                mainBkg: '#27FB6B',
+                secondBkg: '#F2F4FF',
+                tertiaryBkg: '#DEE7FF',
+                fontFamily: 'Nunito, sans-serif'
+            }
+        });
+        
+        function showPhase(phase) {
+            // Hide all phases
+            document.querySelectorAll('.phase-content').forEach(content => {
+                content.classList.remove('active');
+            });
+            
+            // Remove active from all cards
+            document.querySelectorAll('.phase-card').forEach(card => {
+                card.classList.remove('active');
+            });
+            
+            // Show selected phase
+            document.getElementById('phase-' + phase).classList.add('active');
+            
+            // Add active to clicked card
+            event.currentTarget.classList.add('active');
+        }
+    </script>
+</body>
+</html>
