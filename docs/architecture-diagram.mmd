@@ -1,0 +1,80 @@
+graph TB
+    subgraph "Client Layer"
+        iOS[iOS App]
+        Android[Android App]
+        Web[Web App]
+        AdminPortal[Admin Portal]
+    end
+    
+    subgraph "API Gateway"
+        MW[Django Middleware<br/>Monolith]
+    end
+    
+    subgraph "Core Services"
+        Auth[Authentication<br/>Knox/JWT]
+        Account[Account Service]
+        Trans[Transaction Service]
+        Cards[Cards Service]
+        CrossBorder[Cross Border]
+    end
+    
+    subgraph "Integration Layer"
+        subgraph "Banking"
+            Galileo[Galileo API]
+            Plaid[Plaid API]
+            FIS[FIS CodeConnect]
+        end
+        
+        subgraph "Payments"
+            TabaPay[TabaPay]
+            AstroPay[AstroPay]
+            Uniteller[Uniteller]
+            MoneyGram[MoneyGram]
+        end
+        
+        subgraph "Verification"
+            Persona[Persona KYC]
+            Veriff[Veriff]
+            DataVisor[DataVisor]
+        end
+    end
+    
+    subgraph "Data Layer"
+        PostgreSQL[(PostgreSQL)]
+        Redis[(Redis Cache)]
+    end
+    
+    subgraph "Async Processing"
+        Celery[Celery Workers]
+        Queues[Multiple Queues]
+    end
+    
+    iOS --> MW
+    Android --> MW
+    Web --> MW
+    AdminPortal --> MW
+    
+    MW --> Auth
+    MW --> Account
+    MW --> Trans
+    MW --> Cards
+    MW --> CrossBorder
+    
+    Account --> Galileo
+    Account --> Plaid
+    Trans --> TabaPay
+    Trans --> AstroPay
+    CrossBorder --> Uniteller
+    CrossBorder --> MoneyGram
+    
+    Auth --> Persona
+    Auth --> Veriff
+    
+    MW --> PostgreSQL
+    MW --> Redis
+    MW --> Celery
+    Celery --> Queues
+    
+    style MW fill:#f96,stroke:#333,stroke-width:4px
+    style PostgreSQL fill:#326ce5,stroke:#333,stroke-width:2px
+    style Redis fill:#dc382d,stroke:#333,stroke-width:2px

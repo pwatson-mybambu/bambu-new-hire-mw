@@ -1,0 +1,78 @@
+graph TB
+    subgraph "Phase 1: Current State Analysis"
+        subgraph "Company Context"
+            COMPANY[MyBambu<br/>20-30M Target Users<br/>$170B Remittance Market]
+            GROWTH[5x HQ Expansion<br/>190 New Jobs<br/>West Palm Beach]
+        end
+        
+        subgraph "Architecture Issues 🔴"
+            MONO[Django Monolith<br/>52 Apps<br/>884 Endpoints]
+            PERF[346 N+1 Queries<br/>No Caching<br/>49:1 Query Ratio]
+            SCALE[Single Database<br/>No Replicas<br/>400+ Migrations]
+            COUPLING[High Coupling<br/>No Service Boundaries<br/>Mixed Auth Patterns]
+        end
+        
+        subgraph "Integration Complexity 🟡"
+            INT22[22 Third-Party Services]
+            INTAUTH[7 Different Auth Patterns]
+            INTGAL[Galileo: 200+ APIs<br/>CRITICAL]
+            INTPAY[TabaPay, AstroPay<br/>MoneyGram, Uniteller]
+            INTKYC[Persona, Veriff<br/>DataVisor]
+        end
+        
+        subgraph "Documentation State 🟠"
+            DOCS[851 Pages Total]
+            STALE[51% Outdated<br/>2+ Years Old]
+            GAPS[No ADRs<br/>No API Specs<br/>No DR Plans]
+        end
+        
+        subgraph "Market Research 🟢"
+            SALARY[$150-175K Base<br/>Florida Market]
+            SKILLS[Django + Microservices<br/>15% Premium]
+            ASSESS[3-6 Hour Challenge<br/>Take-Home Preferred]
+        end
+        
+        subgraph "Opportunities 🔵"
+            QUICK[70-90% Performance Gains<br/>Quick Wins Available]
+            EXTRACT[5 Natural Services<br/>Identity, Payments, Banking]
+            MODERN[API Gateway<br/>Event-Driven<br/>Service Mesh]
+        end
+    end
+    
+    COMPANY --> MONO
+    MONO --> PERF
+    MONO --> SCALE
+    MONO --> COUPLING
+    
+    MONO --> INT22
+    INT22 --> INTAUTH
+    INT22 --> INTGAL
+    INT22 --> INTPAY
+    INT22 --> INTKYC
+    
+    MONO --> DOCS
+    DOCS --> STALE
+    DOCS --> GAPS
+    
+    GROWTH --> SALARY
+    SALARY --> SKILLS
+    SKILLS --> ASSESS
+    
+    PERF --> QUICK
+    COUPLING --> EXTRACT
+    SCALE --> MODERN
+    
+    style COMPANY fill:#e1f5fe
+    style GROWTH fill:#e8f5e9
+    style MONO fill:#ffebee
+    style PERF fill:#ffcdd2
+    style SCALE fill:#ffcdd2
+    style COUPLING fill:#ffcdd2
+    style INT22 fill:#fff3e0
+    style INTGAL fill:#ff6b6b
+    style DOCS fill:#ffe0b2
+    style STALE fill:#ffcc80
+    style SALARY fill:#c8e6c9
+    style QUICK fill:#bbdefb
+    style EXTRACT fill:#90caf9
+    style MODERN fill:#64b5f6

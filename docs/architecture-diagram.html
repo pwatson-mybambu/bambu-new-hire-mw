@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MyBambu Middleware Architecture Diagram</title>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <script>
+        mermaid.initialize({ 
+            startOnLoad: true,
+            theme: 'default',
+            themeVariables: {
+                primaryColor: '#ffffff',
+                primaryTextColor: '#000',
+                primaryBorderColor: '#7C0000',
+                lineColor: '#5D4E37',
+                background: '#f4f4f4'
+            }
+        });
+    </script>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            margin: 0;
+            padding: 20px;
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            padding: 30px;
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+        .subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 30px;
+        }
+        .diagram-container {
+            background: #fafafa;
+            border-radius: 8px;
+            padding: 20px;
+            border: 1px solid #e0e0e0;
+        }
+        .legend {
+            margin-top: 30px;
+            padding: 20px;
+            background: #f5f5f5;
+            border-radius: 8px;
+        }
+        .legend h3 {
+            margin-top: 0;
+            color: #555;
+        }
+        .legend-item {
+            display: inline-block;
+            margin: 10px 20px 10px 0;
+        }
+        .legend-color {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            margin-right: 8px;
+            vertical-align: middle;
+            border-radius: 3px;
+        }
+        .notes {
+            margin-top: 20px;
+            padding: 15px;
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            border-radius: 4px;
+        }
+        .notes h4 {
+            margin-top: 0;
+            color: #856404;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>MyBambu Middleware Architecture</h1>
+        <p class="subtitle">Current Monolithic Architecture - Django-based Middleware System</p>
+        
+        <div class="diagram-container">
+            <div class="mermaid">
+                graph TB
+                    subgraph "Client Layer"
+                        iOS[iOS App]
+                        Android[Android App]
+                        Web[Web App]
+                        AdminPortal[Admin Portal]
+                    end
+                    
+                    subgraph "API Gateway"
+                        MW[Django Middleware<br/>Monolith]
+                    end
+                    
+                    subgraph "Core Services"
+                        Auth[Authentication<br/>Knox/JWT]
+                        Account[Account Service]
+                        Trans[Transaction Service]
+                        Cards[Cards Service]
+                        CrossBorder[Cross Border]
+                    end
+                    
+                    subgraph "Integration Layer"
+                        subgraph "Banking"
+                            Galileo[Galileo API]
+                            Plaid[Plaid API]
+                            FIS[FIS CodeConnect]
+                        end
+                        
+                        subgraph "Payments"
+                            TabaPay[TabaPay]
+                            AstroPay[AstroPay]
+                            Uniteller[Uniteller]
+                            MoneyGram[MoneyGram]
+                        end
+                        
+                        subgraph "Verification"
+                            Persona[Persona KYC]
+                            Veriff[Veriff]
+                            DataVisor[DataVisor]
+                        end
+                    end
+                    
+                    subgraph "Data Layer"
+                        PostgreSQL[(PostgreSQL)]
+                        Redis[(Redis Cache)]
+                    end
+                    
+                    subgraph "Async Processing"
+                        Celery[Celery Workers]
+                        Queues[Multiple Queues]
+                    end
+                    
+                    iOS --> MW
+                    Android --> MW
+                    Web --> MW
+                    AdminPortal --> MW
+                    
+                    MW --> Auth
+                    MW --> Account
+                    MW --> Trans
+                    MW --> Cards
+                    MW --> CrossBorder
+                    
+                    Account --> Galileo
+                    Account --> Plaid
+                    Trans --> TabaPay
+                    Trans --> AstroPay
+                    CrossBorder --> Uniteller
+                    CrossBorder --> MoneyGram
+                    
+                    Auth --> Persona
+                    Auth --> Veriff
+                    
+                    MW --> PostgreSQL
+                    MW --> Redis
+                    MW --> Celery
+                    Celery --> Queues
+                    
+                    style MW fill:#f96,stroke:#333,stroke-width:4px
+                    style PostgreSQL fill:#326ce5,stroke:#333,stroke-width:2px
+                    style Redis fill:#dc382d,stroke:#333,stroke-width:2px
+            </div>
+        </div>
+        
+        <div class="legend">
+            <h3>Architecture Components</h3>
+            <div class="legend-item">
+                <span class="legend-color" style="background: #ff9966; border: 2px solid #333;"></span>
+                <strong>Django Monolith:</strong> Central middleware processing all requests
+            </div>
+            <div class="legend-item">
+                <span class="legend-color" style="background: #326ce5;"></span>
+                <strong>PostgreSQL:</strong> Primary database
+            </div>
+            <div class="legend-item">
+                <span class="legend-color" style="background: #dc382d;"></span>
+                <strong>Redis:</strong> Caching and session storage
+            </div>
+        </div>
+        
+        <div class="notes">
+            <h4>⚠️ Current Architecture Challenges</h4>
+            <ul>
+                <li><strong>Monolithic Coupling:</strong> All services tightly integrated in single Django project</li>
+                <li><strong>Single Point of Failure:</strong> One deployment affects entire system</li>
+                <li><strong>Scalability Limitations:</strong> Difficult to scale individual components</li>
+                <li><strong>Integration Complexity:</strong> 20+ third-party services without proper abstraction</li>
+                <li><strong>Testing Challenges:</strong> Hard to test components in isolation</li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>

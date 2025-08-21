@@ -1,0 +1,106 @@
+graph TB
+    %% Phase 2: Skills Mapped to Architecture Challenges
+    
+    subgraph "Current Architecture Challenges"
+        subgraph "Performance Issues"
+            N1[346 N+1 Queries]
+            SLOW[30-second page loads]
+            CACHE[No caching strategy]
+            DB[Single PostgreSQL instance]
+        end
+        
+        subgraph "Monolith Problems"
+            MONO[52 Django apps<br/>500K+ lines]
+            COUPLE[High coupling]
+            DEPLOY[2-week deploy cycles]
+            SCALE[Cannot scale independently]
+        end
+        
+        subgraph "Integration Chaos"
+            INT22[22 third-party services]
+            AUTH7[7 auth patterns]
+            NOCB[No circuit breakers]
+            FAIL[Cascading failures]
+        end
+        
+        subgraph "Technical Debt"
+            MIG400[400+ migrations]
+            DOC51[51% docs outdated]
+            SECRET[Hardcoded secrets]
+            TEST[Insufficient testing]
+        end
+    end
+    
+    subgraph "Required Skills Matrix"
+        subgraph "Critical Skills 40%"
+            DJANGO[Django Expert<br/>5+ years<br/>12 points]
+            DECOMP[Monolith Decomposition<br/>2-3 migrations<br/>10 points]
+            POSTGRES[PostgreSQL Master<br/>Query optimization<br/>9 points]
+            API[API Architecture<br/>Gateway, versioning<br/>9 points]
+        end
+        
+        subgraph "Important Skills 35%"
+            MICRO[Microservices<br/>Docker/K8s<br/>10 points]
+            FINTECH[Financial Domain<br/>Payments, compliance<br/>8 points]
+            INTPAT[Integration Patterns<br/>Resilience, webhooks<br/>9 points]
+            LEAD[Team Leadership<br/>10+ engineers<br/>8 points]
+        end
+        
+        subgraph "Nice-to-Have 25%"
+            AWS[AWS Expertise<br/>7 points]
+            SPECIFIC[Galileo/Plaid<br/>6 points]
+            SPANISH[Spanish Language<br/>4 points]
+            STARTUP[Startup Experience<br/>4 points]
+        end
+    end
+    
+    subgraph "Candidate Evaluation Path"
+        RESUME[Resume Screen<br/>60+ points]
+        PHONE[Phone Screen<br/>65+ points]
+        ASSESS[Technical Assessment<br/>+/- 10 points]
+        ONSITE[On-site Interviews<br/>70+ final score]
+        OFFER[Offer Decision]
+    end
+    
+    %% Map Skills to Challenges
+    DJANGO -.->|Solves| MONO
+    DJANGO -.->|Optimizes| N1
+    DECOMP -.->|Transforms| MONO
+    DECOMP -.->|Enables| SCALE
+    POSTGRES -.->|Fixes| N1
+    POSTGRES -.->|Optimizes| DB
+    API -.->|Governs| INT22
+    
+    MICRO -.->|Enables| DEPLOY
+    MICRO -.->|Solves| SCALE
+    FINTECH -.->|Ensures| INT22
+    INTPAT -.->|Fixes| NOCB
+    INTPAT -.->|Prevents| FAIL
+    LEAD -.->|Addresses| DOC51
+    LEAD -.->|Reduces| TEST
+    
+    AWS -.->|Improves| DB
+    AWS -.->|Enables| SCALE
+    SPECIFIC -.->|Accelerates| INT22
+    
+    %% Evaluation Flow
+    RESUME --> PHONE
+    PHONE --> ASSESS
+    ASSESS --> ONSITE
+    ONSITE --> OFFER
+    
+    %% Scoring Thresholds
+    RESUME -.->|"≥60 pts"| PHONE
+    PHONE -.->|"≥65 pts"| ASSESS
+    ONSITE -.->|"≥70 pts"| OFFER
+    
+    %% Style critical elements
+    style N1 fill:#ff6b6b,stroke:#c92a2a,stroke-width:3px
+    style MONO fill:#ff6b6b,stroke:#c92a2a,stroke-width:3px
+    style INT22 fill:#ff6b6b,stroke:#c92a2a,stroke-width:3px
+    
+    style DJANGO fill:#51cf66,stroke:#2f9e44,stroke-width:3px
+    style DECOMP fill:#51cf66,stroke:#2f9e44,stroke-width:3px
+    style POSTGRES fill:#51cf66,stroke:#2f9e44,stroke-width:3px
+    
+    style OFFER fill:#ffd43b,stroke:#fab005,stroke-width:3px

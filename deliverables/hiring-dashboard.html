@@ -1,0 +1,719 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MyBambu Middleware Architect Hiring Dashboard</title>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: #2c3e50;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .logo-circle {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 24px;
+        }
+        
+        h1 {
+            color: #2c3e50;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+        
+        .subtitle {
+            color: #7f8c8d;
+            font-size: 1.2em;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+        
+        .stat-card {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+        }
+        
+        .stat-number {
+            font-size: 2em;
+            font-weight: bold;
+            color: #667eea;
+        }
+        
+        .stat-label {
+            color: #7f8c8d;
+            margin-top: 5px;
+        }
+        
+        .phase-navigation {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .phase-card {
+            background: white;
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .phase-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+        }
+        
+        .phase-card.completed {
+            border-top: 4px solid #27ae60;
+        }
+        
+        .phase-card.active {
+            border-top: 4px solid #f39c12;
+        }
+        
+        .phase-card.pending {
+            border-top: 4px solid #95a5a6;
+            opacity: 0.7;
+        }
+        
+        .phase-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .phase-title {
+            font-size: 1.3em;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+        
+        .phase-status {
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            font-weight: bold;
+        }
+        
+        .status-completed {
+            background: #d4edda;
+            color: #155724;
+        }
+        
+        .status-active {
+            background: #fff3cd;
+            color: #856404;
+        }
+        
+        .status-pending {
+            background: #f8f9fa;
+            color: #6c757d;
+        }
+        
+        .deliverables-list {
+            list-style: none;
+            margin-top: 15px;
+        }
+        
+        .deliverables-list li {
+            padding: 8px 0;
+            border-bottom: 1px solid #ecf0f1;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .deliverables-list li:last-child {
+            border-bottom: none;
+        }
+        
+        .check-icon {
+            color: #27ae60;
+            font-weight: bold;
+        }
+        
+        .main-content {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 30px;
+        }
+        
+        .content-section {
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+        
+        .section-title {
+            font-size: 1.5em;
+            color: #2c3e50;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #ecf0f1;
+        }
+        
+        .key-requirements {
+            display: grid;
+            gap: 15px;
+        }
+        
+        .requirement-item {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 4px solid #667eea;
+        }
+        
+        .requirement-title {
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 5px;
+        }
+        
+        .requirement-desc {
+            color: #7f8c8d;
+            font-size: 0.95em;
+        }
+        
+        .quick-links {
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+        
+        .link-category {
+            margin-bottom: 25px;
+        }
+        
+        .link-category-title {
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+        
+        .link-list {
+            list-style: none;
+        }
+        
+        .link-list li {
+            margin-bottom: 8px;
+        }
+        
+        .link-list a {
+            color: #667eea;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 5px;
+            border-radius: 4px;
+            transition: background 0.3s;
+        }
+        
+        .link-list a:hover {
+            background: #f8f9fa;
+            text-decoration: underline;
+        }
+        
+        .diagram-container {
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            margin-top: 30px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+        
+        .mermaid {
+            text-align: center;
+        }
+        
+        .timeline {
+            display: flex;
+            justify-content: space-between;
+            margin: 30px 0;
+            position: relative;
+        }
+        
+        .timeline::before {
+            content: '';
+            position: absolute;
+            top: 20px;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: #ecf0f1;
+            z-index: 0;
+        }
+        
+        .timeline-item {
+            flex: 1;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .timeline-dot {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: white;
+            border: 3px solid #ecf0f1;
+            margin: 0 auto 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+        
+        .timeline-dot.completed {
+            border-color: #27ae60;
+            background: #27ae60;
+            color: white;
+        }
+        
+        .timeline-dot.active {
+            border-color: #f39c12;
+            background: #f39c12;
+            color: white;
+        }
+        
+        .timeline-label {
+            font-size: 0.9em;
+            color: #7f8c8d;
+        }
+        
+        .action-buttons {
+            display: flex;
+            gap: 15px;
+            margin-top: 30px;
+        }
+        
+        .btn {
+            padding: 12px 24px;
+            border-radius: 8px;
+            border: none;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+        
+        .btn-secondary {
+            background: white;
+            color: #667eea;
+            border: 2px solid #667eea;
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        
+        .footer {
+            text-align: center;
+            color: white;
+            margin-top: 50px;
+            padding: 20px;
+        }
+        
+        @media (max-width: 768px) {
+            .phase-navigation {
+                grid-template-columns: 1fr;
+            }
+            
+            .main-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">
+                <div class="logo-circle">B</div>
+                <div>
+                    <h1>MyBambu Middleware Architect Hiring</h1>
+                    <div class="subtitle">Comprehensive Hiring Process Dashboard</div>
+                </div>
+            </div>
+            
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-number">$150-175K</div>
+                    <div class="stat-label">Base Salary</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">30M</div>
+                    <div class="stat-label">Users Impacted</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">52</div>
+                    <div class="stat-label">Django Apps</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">22</div>
+                    <div class="stat-label">Integrations</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">70%</div>
+                    <div class="stat-label">Performance Gain</div>
+                </div>
+            </div>
+        </header>
+        
+        <div class="phase-navigation">
+            <div class="phase-card completed" onclick="scrollToSection('phase1')">
+                <div class="phase-header">
+                    <div class="phase-title">Phase 1: Analysis</div>
+                    <div class="phase-status status-completed">COMPLETE</div>
+                </div>
+                <div class="deliverables-list">
+                    <li><span class="check-icon">✓</span> Company Profile</li>
+                    <li><span class="check-icon">✓</span> Architecture Assessment</li>
+                    <li><span class="check-icon">✓</span> Integration Landscape</li>
+                    <li><span class="check-icon">✓</span> Performance Analysis</li>
+                    <li><span class="check-icon">✓</span> Market Research</li>
+                    <li><span class="check-icon">✓</span> Documentation Index</li>
+                </div>
+            </div>
+            
+            <div class="phase-card completed" onclick="scrollToSection('phase2')">
+                <div class="phase-header">
+                    <div class="phase-title">Phase 2: Requirements</div>
+                    <div class="phase-status status-completed">COMPLETE</div>
+                </div>
+                <div class="deliverables-list">
+                    <li><span class="check-icon">✓</span> Job Descriptions (3 versions)</li>
+                    <li><span class="check-icon">✓</span> Skills Evaluation Matrix</li>
+                    <li><span class="check-icon">✓</span> Ideal Candidate Profile</li>
+                    <li><span class="check-icon">✓</span> Requirements Diagram</li>
+                </div>
+            </div>
+            
+            <div class="phase-card active" onclick="scrollToSection('phase3')">
+                <div class="phase-header">
+                    <div class="phase-title">Phase 3: Evaluation</div>
+                    <div class="phase-status status-active">IN PROGRESS</div>
+                </div>
+                <div class="deliverables-list">
+                    <li>⏳ Coding Challenge Design</li>
+                    <li>⏳ Interview Guide</li>
+                    <li>⏳ Evaluation Rubric</li>
+                    <li>⏳ Assessment Package</li>
+                </div>
+            </div>
+        </div>
+        
+        <div class="main-content">
+            <div class="content-section">
+                <h2 class="section-title">Position Overview</h2>
+                <p style="margin-bottom: 20px;">
+                    MyBambu is seeking a Senior Middleware Architect to lead the transformation of our Django-based fintech platform 
+                    serving 20-30 million underbanked Latino immigrants. This role is critical for scaling our infrastructure to handle 
+                    $170B in annual remittances while maintaining 99.9% uptime.
+                </p>
+                
+                <h3 style="margin: 20px 0 15px; color: #2c3e50;">Key Technical Challenges</h3>
+                <div class="key-requirements">
+                    <div class="requirement-item">
+                        <div class="requirement-title">Monolith Decomposition</div>
+                        <div class="requirement-desc">Transform 52 Django apps (500K+ lines) into microservices architecture</div>
+                    </div>
+                    <div class="requirement-item">
+                        <div class="requirement-title">Performance Optimization</div>
+                        <div class="requirement-desc">Fix 346 N+1 queries, implement caching for 70-90% improvement</div>
+                    </div>
+                    <div class="requirement-item">
+                        <div class="requirement-title">Integration Modernization</div>
+                        <div class="requirement-desc">Manage 22 third-party services with resilience patterns</div>
+                    </div>
+                    <div class="requirement-item">
+                        <div class="requirement-title">Team Leadership</div>
+                        <div class="requirement-desc">Guide 10+ engineers through architectural transformation</div>
+                    </div>
+                </div>
+                
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-dot completed">1</div>
+                        <div class="timeline-label">Analysis<br/>Complete</div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-dot completed">2</div>
+                        <div class="timeline-label">Requirements<br/>Complete</div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-dot active">3</div>
+                        <div class="timeline-label">Evaluation<br/>In Progress</div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-dot">4</div>
+                        <div class="timeline-label">Execution<br/>Pending</div>
+                    </div>
+                </div>
+                
+                <div class="action-buttons">
+                    <a href="../planning/phase-2-requirements/job-description-versions.md" class="btn btn-primary">View Job Descriptions</a>
+                    <a href="../planning/phase-2-requirements/skills-evaluation-matrix.md" class="btn btn-secondary">Skills Matrix</a>
+                </div>
+            </div>
+            
+            <div class="quick-links">
+                <h2 class="section-title">Quick Links</h2>
+                
+                <div class="link-category">
+                    <div class="link-category-title">📊 Phase 1 - Analysis</div>
+                    <ul class="link-list">
+                        <li><a href="../planning/phase-1-analysis/company-profile.md">→ Company Profile</a></li>
+                        <li><a href="../planning/phase-1-analysis/architecture-assessment.md">→ Architecture Assessment</a></li>
+                        <li><a href="../planning/phase-1-analysis/integration-landscape.md">→ Integration Landscape</a></li>
+                        <li><a href="../planning/phase-1-analysis/performance-analysis.md">→ Performance Analysis</a></li>
+                        <li><a href="../planning/phase-1-analysis/market-research.md">→ Market Research</a></li>
+                        <li><a href="../planning/phase-1-analysis/documentation-index.md">→ Documentation Index</a></li>
+                    </ul>
+                </div>
+                
+                <div class="link-category">
+                    <div class="link-category-title">📝 Phase 2 - Requirements</div>
+                    <ul class="link-list">
+                        <li><a href="../planning/phase-2-requirements/job-description-versions.md">→ Job Descriptions</a></li>
+                        <li><a href="../planning/phase-2-requirements/skills-evaluation-matrix.md">→ Skills Matrix</a></li>
+                        <li><a href="../planning/phase-2-requirements/ideal-candidate-profile.md">→ Candidate Profile</a></li>
+                        <li><a href="../planning/phase-2-requirements/phase-2-diagram.mmd">→ Requirements Diagram</a></li>
+                    </ul>
+                </div>
+                
+                <div class="link-category">
+                    <div class="link-category-title">🎯 Phase 3 - Evaluation</div>
+                    <ul class="link-list">
+                        <li><a href="#" style="opacity: 0.5;">→ Coding Challenge (Coming)</a></li>
+                        <li><a href="#" style="opacity: 0.5;">→ Interview Guide (Coming)</a></li>
+                        <li><a href="#" style="opacity: 0.5;">→ Evaluation Rubric (Coming)</a></li>
+                    </ul>
+                </div>
+                
+                <div class="link-category">
+                    <div class="link-category-title">🔧 Reference Materials</div>
+                    <ul class="link-list">
+                        <li><a href="../../CLAUDE.md">→ Project Context</a></li>
+                        <li><a href="../docs/architecture-diagram.html">→ Architecture Diagram</a></li>
+                        <li><a href="../../../../docs/atlassian-wiki/">→ Wiki Documentation</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <div class="diagram-container">
+            <h2 class="section-title">Skills to Architecture Challenges Mapping</h2>
+            <div class="mermaid">
+                graph TB
+                    subgraph "Architecture Challenges"
+                        N1[346 N+1 Queries]
+                        MONO[52 Django Apps]
+                        INT[22 Integrations]
+                        PERF[Performance Issues]
+                    end
+                    
+                    subgraph "Required Skills"
+                        DJANGO[Django Expert]
+                        DECOMP[Decomposition Experience]
+                        POSTGRES[PostgreSQL Master]
+                        API[API Architecture]
+                    end
+                    
+                    DJANGO --> MONO
+                    DECOMP --> MONO
+                    POSTGRES --> N1
+                    API --> INT
+                    POSTGRES --> PERF
+                    
+                    style N1 fill:#ff6b6b
+                    style DJANGO fill:#51cf66
+            </div>
+        </div>
+        
+        <div class="diagram-container">
+            <h2 class="section-title">Current Architecture Overview</h2>
+            <div class="mermaid">
+                graph TB
+                    subgraph "Client Layer"
+                        iOS[iOS App]
+                        Android[Android App]
+                        Web[Web App]
+                    end
+                    
+                    subgraph "Monolith"
+                        MW[Django Middleware<br/>52 Apps, 884 Endpoints]
+                    end
+                    
+                    subgraph "Integrations"
+                        Galileo[Galileo Banking]
+                        Plaid[Plaid]
+                        MoneyGram[MoneyGram]
+                        Others[19 Others...]
+                    end
+                    
+                    subgraph "Infrastructure"
+                        DB[(PostgreSQL)]
+                        Redis[(Redis)]
+                        Celery[14 Celery Queues]
+                    end
+                    
+                    iOS --> MW
+                    Android --> MW
+                    Web --> MW
+                    MW --> Galileo
+                    MW --> Plaid
+                    MW --> MoneyGram
+                    MW --> Others
+                    MW --> DB
+                    MW --> Redis
+                    MW --> Celery
+                    
+                    style MW fill:#ff6b6b,stroke:#333,stroke-width:4px
+            </div>
+        </div>
+        
+        <div class="diagram-container">
+            <h2 class="section-title">Target Microservices Architecture</h2>
+            <div class="mermaid">
+                graph TB
+                    subgraph "API Gateway"
+                        GW[API Gateway]
+                    end
+                    
+                    subgraph "Core Services"
+                        Identity[Identity Service]
+                        Payments[Payments Service]
+                        Transfers[Transfers Service]
+                        Banking[Banking Service]
+                    end
+                    
+                    subgraph "Infrastructure"
+                        EventBus[Event Bus]
+                        Cache[Distributed Cache]
+                        DBs[(Service DBs)]
+                    end
+                    
+                    GW --> Identity
+                    GW --> Payments
+                    GW --> Transfers
+                    GW --> Banking
+                    
+                    Identity --> EventBus
+                    Payments --> EventBus
+                    Transfers --> EventBus
+                    Banking --> EventBus
+                    
+                    Identity --> Cache
+                    Payments --> Cache
+                    Identity --> DBs
+                    Payments --> DBs
+                    
+                    style GW fill:#51cf66
+                    style EventBus fill:#4ecdc4
+            </div>
+        </div>
+        
+        <footer class="footer">
+            <p><strong>MyBambu Middleware Architect Hiring Process</strong></p>
+            <p>Transforming Financial Access for 30 Million Underserved Users</p>
+            <p style="margin-top: 10px; opacity: 0.8;">Generated: August 2025 | Project Lead: Patrick Watson</p>
+        </footer>
+    </div>
+    
+    <script>
+        // Initialize Mermaid
+        mermaid.initialize({ 
+            startOnLoad: true,
+            theme: 'default',
+            themeVariables: {
+                primaryColor: '#667eea',
+                primaryTextColor: '#fff',
+                primaryBorderColor: '#7C0000',
+                lineColor: '#5c6ac4',
+                secondaryColor: '#006100',
+                tertiaryColor: '#fff'
+            }
+        });
+        
+        // Smooth scroll function
+        function scrollToSection(sectionId) {
+            document.getElementById(sectionId)?.scrollIntoView({ behavior: 'smooth' });
+        }
+        
+        // Add interactive tooltips
+        document.querySelectorAll('.requirement-item').forEach(item => {
+            item.addEventListener('click', function() {
+                this.style.transform = 'scale(1.02)';
+                setTimeout(() => {
+                    this.style.transform = 'scale(1)';
+                }, 200);
+            });
+        });
+    </script>
+</body>
+</html>

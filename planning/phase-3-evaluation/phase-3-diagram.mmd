@@ -1,0 +1,120 @@
+graph TB
+    %% Phase 3: Complete Evaluation Process Flow
+    
+    subgraph "Candidate Pipeline"
+        APPLY[Application Received]
+        SCREEN[Recruiter Screen<br/>30 min]
+        TECH[Technical Phone<br/>45 min]
+        CHALLENGE[Coding Challenge<br/>3-6 hours]
+        DEEPDIVE[Technical Deep Dive<br/>90 min]
+        SYSDESIGN[System Design<br/>60 min]
+        BEHAVIORAL[Behavioral/Leadership<br/>45 min]
+        TEAM[Team Fit<br/>30 min]
+        EXEC[Executive Review<br/>30 min]
+        OFFER[Offer Decision]
+    end
+    
+    subgraph "Evaluation Components"
+        subgraph "Coding Challenge 40%"
+            CE1[Service Extraction<br/>10 pts]
+            CE2[API Design<br/>5 pts]
+            CE3[Migration Strategy<br/>5 pts]
+            CE4[Code Quality<br/>5 pts]
+            CE5[Extensions<br/>10 pts]
+            CE6[Testing & Docs<br/>5 pts]
+        end
+        
+        subgraph "Technical Interview 35%"
+            TI1[Phone Screen<br/>5 pts]
+            TI2[Code Review<br/>5 pts]
+            TI3[Architecture<br/>5 pts]
+            TI4[Performance<br/>5 pts]
+            TI5[System Design<br/>15 pts]
+        end
+        
+        subgraph "Behavioral 15%"
+            BH1[Leadership<br/>3 pts]
+            BH2[Mentorship<br/>3 pts]
+            BH3[Stakeholder<br/>2 pts]
+            BH4[Mission<br/>2 pts]
+            BH5[Communication<br/>5 pts]
+        end
+        
+        subgraph "Team Fit 10%"
+            TF1[Peer Assessment<br/>5 pts]
+            TF2[Executive View<br/>5 pts]
+        end
+    end
+    
+    subgraph "Decision Framework"
+        SCORE[Total Score<br/>100 points]
+        
+        EXCEPTIONAL[90-100 pts<br/>Exceptional<br/>Fast Track]
+        STRONG[80-89 pts<br/>Strong Hire<br/>Top of Range]
+        HIRE[70-79 pts<br/>Hire<br/>Mid Range]
+        BORDERLINE[60-69 pts<br/>Borderline<br/>Discussion]
+        REJECT[<60 pts<br/>No Hire]
+    end
+    
+    subgraph "Key Skills Assessed"
+        DJANGO[Django Mastery<br/>Critical]
+        DECOMP[Decomposition<br/>Critical]
+        POSTGRES[PostgreSQL<br/>Critical]
+        MICRO[Microservices<br/>Important]
+        FINTECH[Financial Domain<br/>Important]
+        LEADER[Leadership<br/>Important]
+    end
+    
+    %% Flow connections
+    APPLY --> SCREEN
+    SCREEN -->|Pass| TECH
+    SCREEN -->|Fail| REJECT
+    TECH -->|Pass| CHALLENGE
+    TECH -->|Fail| REJECT
+    CHALLENGE -->|Submit| DEEPDIVE
+    DEEPDIVE --> SYSDESIGN
+    SYSDESIGN --> BEHAVIORAL
+    BEHAVIORAL --> TEAM
+    TEAM --> EXEC
+    EXEC --> OFFER
+    
+    %% Scoring connections
+    CE1 & CE2 & CE3 & CE4 & CE5 & CE6 --> SCORE
+    TI1 & TI2 & TI3 & TI4 & TI5 --> SCORE
+    BH1 & BH2 & BH3 & BH4 & BH5 --> SCORE
+    TF1 & TF2 --> SCORE
+    
+    SCORE --> EXCEPTIONAL
+    SCORE --> STRONG  
+    SCORE --> HIRE
+    SCORE --> BORDERLINE
+    SCORE --> REJECT
+    
+    %% Skills mapping
+    DJANGO -.->|Validates| TI1
+    DJANGO -.->|Tests| CE4
+    DECOMP -.->|Proves| CE1
+    DECOMP -.->|Designs| TI5
+    POSTGRES -.->|Optimizes| TI4
+    MICRO -.->|Demonstrates| CE5
+    FINTECH -.->|Shows| BH4
+    LEADER -.->|Exhibits| BH1
+    
+    %% Offer determination
+    EXCEPTIONAL -->|$170-175K| OFFER
+    STRONG -->|$160-170K| OFFER
+    HIRE -->|$150-160K| OFFER
+    BORDERLINE -->|Review| OFFER
+    
+    %% Style critical elements
+    style APPLY fill:#e8f5e9,stroke:#4caf50,stroke-width:2px
+    style OFFER fill:#fff3e0,stroke:#ff9800,stroke-width:3px
+    style EXCEPTIONAL fill:#4caf50,color:#fff
+    style STRONG fill:#8bc34a,color:#fff
+    style HIRE fill:#cddc39
+    style BORDERLINE fill:#ffeb3b
+    style REJECT fill:#f44336,color:#fff
+    
+    style DJANGO fill:#1976d2,color:#fff,stroke-width:3px
+    style DECOMP fill:#1976d2,color:#fff,stroke-width:3px
+    style POSTGRES fill:#1976d2,color:#fff,stroke-width:3px
