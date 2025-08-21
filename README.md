@@ -4,11 +4,29 @@
 
 This repository contains a complete hiring package for the MyBambu Middleware Architect position. All materials are ready for immediate use.
 
-### 🌐 View Live HTML Visualizations
-**[📊 Interactive Hiring Dashboard](https://htmlpreview.github.io/?https://github.com/pwatson-mybambu/bambu-new-hire-mw/blob/main/deliverables/hiring-dashboard.html)** - Complete visual overview of the hiring process  
-**[🏗️ Architecture Diagram](https://htmlpreview.github.io/?https://github.com/pwatson-mybambu/bambu-new-hire-mw/blob/main/docs/architecture-diagram.html)** - Interactive middleware architecture visualization
+### 🌐 View HTML Visualizations
 
-> **Note**: Click the links above to view the HTML files rendered in your browser. For local viewing, download and open the HTML files directly.
+Since this is a private repository, there are a few ways to view the HTML files:
+
+#### Method 1: Download and Open Locally (Recommended)
+1. Click on the file links below to view in GitHub
+2. Click "Download" or "Raw" button
+3. Save and open in your browser
+
+**📊 [Hiring Dashboard](deliverables/hiring-dashboard.html)** - Complete visual overview of the hiring process  
+**🏗️ [Architecture Diagram](docs/architecture-diagram.html)** - Interactive middleware architecture visualization
+
+#### Method 2: Clone and View
+```bash
+git clone git@github.com:pwatson-mybambu/bambu-new-hire-mw.git
+cd bambu-new-hire-mw
+open deliverables/hiring-dashboard.html  # Mac
+# or
+start deliverables/hiring-dashboard.html  # Windows
+```
+
+#### Method 3: GitHub Pages (Requires GitHub Pro)
+If you have GitHub Pro, you can enable Pages in Settings → Pages for private repo hosting.
 
 ## Position Overview
 
@@ -112,7 +130,7 @@ This repository contains a complete hiring package for the MyBambu Middleware Ar
 
 ### Project Context
 - [Project Overview](CLAUDE.md)
-- [Architecture Diagrams](https://htmlpreview.github.io/?https://github.com/pwatson-mybambu/bambu-new-hire-mw/blob/main/docs/architecture-diagram.html) - View interactive diagram
+- [Architecture Diagrams](docs/architecture-diagram.html) - Interactive system visualization
 - [Development Process](planning/) - Three-phase analysis and design approach
 
 ## 📊 Success Metrics
