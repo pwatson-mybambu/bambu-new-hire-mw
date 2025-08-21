@@ -6,27 +6,14 @@ This repository contains a complete hiring package for the MyBambu Middleware Ar
 
 ### 🌐 View HTML Visualizations
 
-Since this is a private repository, there are a few ways to view the HTML files:
+**Quick View (Try These First):**
+- **[📊 Interactive Hiring Dashboard](https://htmlpreview.github.io/?https://github.com/pwatson-mybambu/bambu-new-hire-mw/blob/main/deliverables/hiring-dashboard.html)** - Complete visual overview  
+- **[🏗️ Architecture Diagram](https://htmlpreview.github.io/?https://github.com/pwatson-mybambu/bambu-new-hire-mw/blob/main/docs/architecture-diagram.html)** - System architecture visualization
 
-#### Method 1: Download and Open Locally (Recommended)
-1. Click on the file links below to view in GitHub
-2. Click "Download" or "Raw" button
-3. Save and open in your browser
-
-**📊 [Hiring Dashboard](deliverables/hiring-dashboard.html)** - Complete visual overview of the hiring process  
-**🏗️ [Architecture Diagram](docs/architecture-diagram.html)** - Interactive middleware architecture visualization
-
-#### Method 2: Clone and View
-```bash
-git clone git@github.com:pwatson-mybambu/bambu-new-hire-mw.git
-cd bambu-new-hire-mw
-open deliverables/hiring-dashboard.html  # Mac
-# or
-start deliverables/hiring-dashboard.html  # Windows
-```
-
-#### Method 3: GitHub Pages (Requires GitHub Pro)
-If you have GitHub Pro, you can enable Pages in Settings → Pages for private repo hosting.
+> **Note**: If the preview links show "404", you may need to:
+> 1. Ensure you're logged into GitHub in your browser
+> 2. Try refreshing the preview page
+> 3. Or download the files: [Dashboard](deliverables/hiring-dashboard.html) | [Architecture](docs/architecture-diagram.html)
 
 ## Position Overview
 
@@ -130,7 +117,7 @@ If you have GitHub Pro, you can enable Pages in Settings → Pages for private r
 
 ### Project Context
 - [Project Overview](CLAUDE.md)
-- [Architecture Diagrams](docs/architecture-diagram.html) - Interactive system visualization
+- [Architecture Diagrams](https://htmlpreview.github.io/?https://github.com/pwatson-mybambu/bambu-new-hire-mw/blob/main/docs/architecture-diagram.html) - Interactive visualization
 - [Development Process](planning/) - Three-phase analysis and design approach
 
 ## 📊 Success Metrics
